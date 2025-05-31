@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { TrendingUp, TrendingDown, Activity, Database, Clock } from 'lucide-react';
+import { TrendingUp, TrendingDown, Activity, Database } from 'lucide-react';
 
 // Sample data for different time periods
 const timelineData = {
@@ -94,37 +93,24 @@ export const MetricsDashboard = () => {
 
   return (
     <div className="space-y-6">
-      {/* Timeline Selector */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2">
-              <Clock className="h-5 w-5" />
-              Timeline Control
-            </CardTitle>
-            <Select value={selectedTimeline} onValueChange={(value: '24h' | '7d' | '30d' | '90d') => setSelectedTimeline(value)}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select timeline" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="24h">Last 24 Hours</SelectItem>
-                <SelectItem value="7d">Last 7 Days</SelectItem>
-                <SelectItem value="30d">Last 30 Days</SelectItem>
-                <SelectItem value="90d">Last 90 Days</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-gray-600">
-            Currently viewing data for: <span className="font-semibold">{
-              selectedTimeline === '24h' ? 'Last 24 Hours' :
-              selectedTimeline === '7d' ? 'Last 7 Days' :
-              selectedTimeline === '30d' ? 'Last 30 Days' : 'Last 90 Days'
-            }</span>
-          </p>
-        </CardContent>
-      </Card>
+      {/* Header with Timeline Dropdown */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-900">Metrics Dashboard</h2>
+          <p className="text-slate-600">Performance insights and analytics</p>
+        </div>
+        <Select value={selectedTimeline} onValueChange={(value: '24h' | '7d' | '30d' | '90d') => setSelectedTimeline(value)}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select timeline" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="24h">Last 24 Hours</SelectItem>
+            <SelectItem value="7d">Last 7 Days</SelectItem>
+            <SelectItem value="30d">Last 30 Days</SelectItem>
+            <SelectItem value="90d">Last 90 Days</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Performance Trends */}
